@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>10/14 奧斯陸一日遊路線</title>
+<style>
+:root {
+  --bg: #f2f6f7; --ink: #14303f; --mute: #5a707c; --card: #fff;
+  --line: #d3dee3; --water: #cfe3ea; --land: #e9efe6;
+  --r0: #6a4c9c; --r1: #1b6a8f; --r2: #d9662b; --r3: #2d8a6e;
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1c24; --ink: #e6eef1; --mute: #93a8b2; --card: #172a35;
+    --line: #2a4351; --water: #12303f; --land: #1a2b28;
+    --r0: #b39ddb; --r1: #5bb6df; --r2: #f0935a; --r3: #65c2a3;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f1c24; --ink: #e6eef1; --mute: #93a8b2; --card: #172a35;
+  --line: #2a4351; --water: #12303f; --land: #1a2b28;
+  --r0: #b39ddb; --r1: #5bb6df; --r2: #f0935a; --r3: #65c2a3;
+}
+html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+* { box-sizing: inherit; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font: 16px/1.7 "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
+}
+main { max-width: 860px; margin: 0 auto; padding: 28px 18px 56px; }
+
+/* 標題與天氣區塊排版 */
+.header-title { display: flex; align-items: center; gap: 16px; margin: 8px 0 6px; flex-wrap: wrap; }
+h1 { font-size: clamp(30px, 6vw, 46px); line-height: 1.2; margin: 0; letter-spacing: .02em; }
+.weather-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--water); padding: 4px 14px; border-radius: 20px;
+  font-size: 15px; font-weight: 600; color: var(--r1); border: 1px solid var(--line);
+}
+
+.sub { color: var(--mute); margin: 0 0 24px; }
+.map { background: var(--water); border: 1px solid var(--line); border-radius: 6px; overflow-x: auto; }
+.map svg { display: block; width: 100%; min-width: 560px; height: auto; }
+.note { font-size: 13px; color: var(--mute); margin: 8px 0 0; }
+.legend { display: flex; gap: 18px; flex-wrap: wrap; margin: 14px 0 0; font-size: 14px; }
+.legend i { display: inline-block; width: 22px; height: 4px; vertical-align: middle; margin-right: 6px; border-radius: 2px; }
+section { margin-top: 44px; }
+h2 { font-size: 24px; margin: 0 0 4px; }
+.when { color: var(--mute); margin: 0 0 14px; }
+.go { display: inline-block; padding: 10px 18px; border-radius: 4px; color: #fff; text-decoration: none; font-weight: 600; margin-bottom: 18px; }
+.go:focus-visible, a:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
+
+ol { list-style: none; margin: 0; padding: 0; border-left: 3px solid var(--c); }
+li { padding: 2px 0 24px 20px; position: relative; }
+li:before {
+  content: attr(data-n); position: absolute; left: -15px; top: 0;
+  width: 27px; height: 27px; border-radius: 50%; background: var(--c); color: #fff;
+  font-size: 14px; font-weight: 700; text-align: center; line-height: 27px;
+}
+li b { font-size: 18px; }
+li span { display: block; color: var(--mute); font-size: 15px; }
+
+.list-photo { 
+  display: block; width: 100%; max-width: 480px; height: 220px; 
+  object-fit: cover; border-radius: 8px; margin: 12px 0; border: 1px solid var(--line); 
+}
+
+li a { font-size: 14px; color: var(--c); }
+.frame { margin-top: 16px; background: var(--card); border: 1px solid var(--line); border-radius: 6px; overflow: hidden; }
+.frame iframe { display: block; width: 100%; height: 380px; border: 0; background: var(--water); }
+.fbar { display: flex; flex-wrap: wrap; gap: 6px 16px; align-items: center; justify-content: space-between; padding: 10px 14px; font-size: 14px; }
+.fbar b { font-size: 16px; }
+.fbar a { color: var(--r1); }
+
+li .acts { display: flex; flex-wrap: wrap; gap: 4px 16px; margin-top: 8px;}
+li button { font: inherit; font-size: 14px; color: var(--c); background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; }
+li button:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
+
+.walk-info { display: inline-block; margin-top: 14px; padding: 4px 12px; background: var(--bg); color: var(--mute); font-size: 13px; border-radius: 12px; border: 1px dashed var(--line); }
+.walk-info::before { content: '🚶‍♂️ '; font-size: 14px; }
+
+.r0 { --c: var(--r0); } .r1 { --c: var(--r1); } .r2 { --c: var(--r2); } .r3 { --c: var(--r3); }
+.pin { cursor: pointer; }
+.pin text.n { fill: #fff; font-size: 13px; font-weight: 700; text-anchor: middle; }
+.pin text.l { fill: var(--ink); font-size: 13px; paint-order: stroke; stroke: var(--water); stroke-width: 4px; }
+.pin:hover circle, .pin:focus circle { stroke: var(--ink); stroke-width: 3; }
+</style>
+</head>
+<body>
+<main>
+<div class="header-title">
+  <h1>10/14 奧斯陸一日遊</h1>
+  <div class="weather-badge" id="weather-badge">
+    <span class="icon">⌛</span> <span id="weather-temp">載入氣候中...</span>
+  </div>
+</div>
+<p class="sub">結合海灣景點、古典市區與美食巡禮。點地圖上的圓點即可在下方查看地圖圖資。</p>
+
+<div class="map">
+<svg id="map" viewBox="0 0 700 520" role="img" aria-label="奧斯陸一日遊景點示意圖">
+<rect width="700" height="520" fill="var(--water)"/>
+<path d="M0 0H700V350 L660 368 L640 388 L600 402 L560 426 L520 422 L470 400 L430 380 L380 402 L330 422 L280 434 L240 426 L190 402 L150 432 L110 446 L70 438 L30 422 L0 430Z" fill="var(--land)"/>
+<text x="330" y="490" fill="var(--mute)" font-size="14" text-anchor="middle">奧斯陸峽灣</text>
+<g id="lines" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></g>
+<g id="pins"></g>
+</svg>
+</div>
+
+<div class="frame" id="frame">
+<iframe id="gm" title="Google Maps 地圖" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+<div class="fbar"><b id="fname"></b><span><a id="fgm" target="_blank" rel="noopener">在 Google Maps 開啟</a> <a id="fweb" target="_blank" rel="noopener">官方網站</a></span></div>
+</div>
+<div class="legend">
+  <span><i style="background:var(--r0)"></i>住宿</span>
+  <span><i style="background:var(--r1)"></i>路線一 上午</span>
+  <span><i style="background:var(--r2)"></i>路線二 下午</span>
+  <span><i style="background:var(--r3)"></i>路線三 美食巡禮</span>
+</div>
+
+<section class="r0">
+<h2>住宿飯店</h2>
+<p class="when">本次位於奧斯陸的下榻處</p>
+<ol id="l0"></ol>
+</section>
+
+<section class="r1">
+<h2>路線一：中世紀海濱與現代藝術</h2>
+<p class="when">上午到午餐，全程在海灣區，步行順暢</p>
+<a class="go" style="background:var(--r1)" href="https://www.google.com/maps/dir/Akershus+Fortress,+Oslo/Oslo+City+Hall/Aker+Brygge/Astrup+Fearnley+Museet/" target="_blank" rel="noopener">開啟路線一 Google Maps 導航</a>
+<ol id="l1"></ol>
+</section>
+
+<section class="r2">
+<h2>路線二：古典市區與未來建築</h2>
+<p class="when">下午到傍晚，從皇宮沿卡爾約翰大道走到海灣邊的歌劇院</p>
+<a class="go" style="background:var(--r2)" href="https://www.google.com/maps/dir/The+Royal+Palace,+Oslo/Nationaltheatret,+Oslo/Stortinget,+Oslo/Oslo+Cathedral/Deichman+Bjørvika/Munchmuseet/Oslo+Opera+House/" target="_blank" rel="noopener">開啟路線二 Google Maps 導航</a>
+<ol id="l2"></ol>
+</section>
+
+<section class="r3">
+<h2>路線三：美食與咖啡巡禮</h2>
+<p class="when">探索奧斯陸市區的道地美食廣場、精品咖啡與人氣海鮮餐廳</p>
+<a class="go" style="background:var(--r3)" href="https://www.google.com/maps/dir/Mathallen+Oslo/Tim+Wendelboe/Fiskeriet+Youngstorget/" target="_blank" rel="noopener">開啟路線三 Google Maps 導航</a>
+<ol id="l3"></ol>
+</section>
+
+</main>
+<script>
+{
+  const fetchWeather = async () => {
+    try {
+      const res = await fetch('https://api.open-meteo.com/v1/forecast?latitude=59.9127&longitude=10.7461&current_weather=true');
+      const data = await res.json();
+      const temp = data.current_weather.temperature;
+      const code = data.current_weather.weathercode;
+      
+      let icon = '☁️';
+      if (code === 0) icon = '☀️';
+      else if (code > 0 && code <= 3) icon = '⛅';
+      else if (code >= 51 && code <= 67) icon = '🌧️';
+      else if (code >= 71 && code <= 77) icon = '❄️';
+      else if (code >= 95) icon = '⛈️';
+
+      document.getElementById('weather-temp').textContent = `${temp}°C`;
+      document.querySelector('#weather-badge .icon').textContent = icon;
+    } catch (e) {
+      document.getElementById('weather-temp').textContent = '暫無天氣資訊';
+      document.querySelector('#weather-badge .icon').textContent = '⚠️';
+    }
+  };
+  fetchWeather();
+
+  const S = [
+    {r:0, b:"H", n:"BJØRVIKA APARTMENTS", d:"本次奧斯陸住宿地點，鄰近歌劇院與中央車站，位於生活機能極佳的 Bjørvika 海濱區。", q:"Bjørvika+Apartments,+Teaterplassen,+Oslo", w:"https://bjorvika-apartments.no/", x:590, y:360},
+    
+    // 路線一
+    {r:1, n:"阿克胡斯城堡", d:"中世紀要塞，俯瞰奧斯陸港口，園區免費參觀。", q:"Akershus+Fortress,+Oslo", w:"https://www.forsvarsbygg.no/en/festningene/akershus-fortress", x:301, y:400, nextWalk:"11 分鐘 (850 公尺)", p:"阿克胡斯城堡.jpeg"},
+    {r:1, n:"奧斯陸市政廳", d:"紅磚雙塔，每日 09:00–16:00 開放參觀，需過安檢。", q:"Oslo+City+Hall", w:"https://www.oslo.kommune.no/english/oslo-city-hall/", x:252, y:277, nextWalk:"5 分鐘 (400 公尺)", p:"奧斯陸市政廳.jpg"},
+    {r:1, n:"阿克爾港口", d:"海濱餐廳區，適合午餐。", q:"Aker+Brygge,+Oslo", w:"https://akerbrygge.no/", x:175, y:316, nextWalk:"10 分鐘 (800 公尺)", p:"阿克爾港口.jpeg"},
+    {r:1, n:"阿斯楚普費恩利現代藝術博物館", d:"位於 Tjuvholmen 的當代藝術館。", q:"Astrup+Fearnley+Museet", w:"https://www.afmuseet.no/en", x:91, y:390, p:"阿斯楚普費恩利現代藝術博物館.jpeg"},
+    
+    // 路線二
+    {r:2, n:"挪威皇宮", d:"卡爾約翰大道的起點，可在庭園散步。", q:"The+Royal+Palace,+Oslo", w:"https://www.royalcourt.no/", x:175, y:134, nextWalk:"6 分鐘 (500 公尺)", p:"挪威皇宮.jpeg"},
+    {r:2, n:"國家劇院", d:"大道上的劇院與地鐵站，前方有廣場。", q:"Nationaltheatret,+Oslo", w:"https://www.nationaltheatret.no/", x:259, y:201, nextWalk:"6 分鐘 (450 公尺)", p:"國家劇院.jpeg"},
+    {r:2, n:"挪威議會大廈", d:"半圓形的新羅馬式建築。", q:"Stortinget,+Oslo", w:"https://www.stortinget.no/en/", x:350, y:246, nextWalk:"5 分鐘 (350 公尺)", p:"挪威議會大廈.jpg"},
+    {r:2, n:"奧斯陸主教座堂", d:"市中心的主教堂，天花板彩繪聞名。", q:"Oslo+Cathedral", w:"https://www.oslodomkirke.no/", x:447, y:257, nextWalk:"10 分鐘 (800 公尺)", p:"奧斯陸主教座堂.jpg"},
+    {r:2, n:"戴克曼主圖書館", d:"Bjørvika 的現代圖書館。", q:"Deichman+Bjørvika", w:"https://www.deichman.no/", x:623, y:372, nextWalk:"4 分鐘 (300 公尺)", p:"戴克曼主圖書館.jpg"},
+    {r:2, n:"孟克美術館", d:"收藏孟克作品，臨海高樓。", q:"Munchmuseet,+Oslo", w:"https://www.munchmuseet.no/en", x:585, y:422, nextWalk:"5 分鐘 (400 公尺)", p:"孟克美術館.jpeg"},
+    {r:2, n:"奧斯陸歌劇院", d:"白色斜面屋頂可以走上去，日落最適合。", q:"Oslo+Opera+House", w:"https://operaen.no/en/", x:520, y:400, p:"奧斯陸歌劇院.jpg"},
+    
+    // 路線三 (美食與咖啡)
+    {r:3, n:"Mathallen Oslo 奧斯陸美食廣場", d:"室內美食廣場，集結多種挪威在地食材、異國小吃與精釀啤酒，適合尋找豐富的午餐選擇。", q:"Mathallen+Oslo", w:"https://mathallenoslo.no/", x:460, y:60, nextWalk:"6 分鐘 (450 公尺)", p:"Mathallen Oslo_2.jpg"},
+    {r:3, n:"Tim Wendelboe", d:"世界級冠軍咖啡師的獨立咖啡店，提供自家烘焙的精品咖啡，是咖啡愛好者的朝聖地。", q:"Tim+Wendelboe,+Oslo", w:"https://timwendelboe.no/", x:510, y:90, nextWalk:"12 分鐘 (900 公尺)", p:"Tim Wendelboe .jpg"},
+    {r:3, n:"Fiskeriet Youngstorget", d:"高評價的海鮮餐廳與魚舖，以新鮮美味的炸魚薯條、魚湯及各式海鮮料理聞名。", q:"Fiskeriet+Youngstorget", w:"https://fiskeriet.no/", x:440, y:180, p:"fiskeriet youngstorget.jpeg"}
+  ];
+
+  const NS = "http://www.w3.org/2000/svg";
+  const lines = document.getElementById("lines");
+  const pins = document.getElementById("pins");
+
+  const show = (s, scroll) => {
+    document.getElementById("gm").src = `https://maps.google.com/maps?q=${s.q}&z=16&hl=zh-TW&output=embed`;
+    document.getElementById("fname").textContent = s.n;
+    document.getElementById("fgm").href = `https://maps.google.com/?q=${s.q}`;
+    document.getElementById("fweb").href = s.w;
+    
+    if (scroll) {
+      document.getElementById("frame").scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  };
+
+  [0, 1, 2, 3].forEach(r => {
+    const pts = S.filter(s => s.r === r);
+    let c = "var(--r0)";
+    if (r === 1) c = "var(--r1)";
+    else if (r === 2) c = "var(--r2)";
+    else if (r === 3) c = "var(--r3)";
+    
+    if(pts.length > 1) {
+      const p = document.createElementNS(NS, "polyline");
+      p.setAttribute("points", pts.map(s => `${s.x},${s.y}`).join(" "));
+      p.setAttribute("stroke", c);
+      lines.appendChild(p);
+    }
+
+    const ol = document.getElementById(`l${r}`);
+    pts.forEach((s, i) => {
+      const li = document.createElement("li");
+      
+      const badgeText = s.b || (i + 1);
+      li.dataset.n = badgeText;
+      
+      const walkBadge = s.nextWalk ? `<div class="walk-info">步行至下一站約 ${s.nextWalk}</div>` : '';
+      const photoHtml = s.p ? `<img class="list-photo" src="${s.p}" alt="${s.n} 實景照片" loading="lazy">` : '';
+
+      li.innerHTML = `
+        <b>${s.n}</b>
+        <span>${s.d}</span>
+        ${photoHtml}
+        <div class="acts">
+          <button type="button">切換上方地圖至此景點</button>
+          <a href="${s.w}" target="_blank" rel="noopener">官方網站</a>
+          <a href="https://maps.google.com/?q=${s.q}" target="_blank" rel="noopener">在 Google Maps 開啟</a>
+        </div>
+        ${walkBadge}
+      `;
+      li.querySelector("button").addEventListener("click", () => show(s, true));
+      ol.appendChild(li);
+
+      const a = document.createElementNS(NS, "g");
+      a.setAttribute("class", "pin");
+      a.setAttribute("tabindex", "0");
+      a.setAttribute("role", "button");
+      a.setAttribute("aria-label", s.n);
+      a.innerHTML = `
+        <circle cx="${s.x}" cy="${s.y}" r="13" fill="${c}"/>
+        <text class="n" x="${s.x}" y="${s.y + 5}">${badgeText}</text>
+        <text class="l" x="${s.x + 17}" y="${s.y + 5}">${s.n}</text>
+      `;
+      a.addEventListener("click", () => show(s, true));
+      a.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          show(s, true);
+        }
+      });
+      pins.appendChild(a);
+    });
+  });
+
+  show(S[0], false);
+}
+</script>
+</body>
+</html>
